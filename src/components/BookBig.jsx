@@ -10,19 +10,22 @@ export const BookBig = () => {
   }, []);
 
   return (
-    <div className="relative top-[64px] mx-[32px] p-4 bg-[#f1f0fe] rounded-[15px]">
-      <div className="grid grid-rows-2 grid-flow-col gap-10">
+    <div className="relative top-[64px] mx-[32px] p-4 bg-[#f1f0fe] rounded-[15px] w-fit h-fit">
+      <div className="grid grid-rows-2 grid-flow-col gap-y-[92px] gap-x-[114px] justify-center">
         {books.map((book, index) => (
-          <div className=" grid grid-cols-2 gap-8" key={index}>
-            <div className="">
+          <div
+            className="book-wrap grid grid-cols-2 w-[564px] h-[346px]"
+            key={index}
+          >
+            <div className="img-container  h-full w-full grid justify-center">
               <img
-                className="w-[277] h-[346px] mx-auto"
+                className="object-cover w-[277px] h-[346px] rounded-lg my-8"
                 src={book.image_url}
                 alt={book.title}
               />
             </div>
 
-            <div className="p-4">
+            <div className="book-info py-8">
               <h1 className="font-bold text-xl">{book.title}</h1>
               <p>by {book.author.name}</p>
               <div className="pt-4 flex justify-start">
@@ -32,7 +35,7 @@ export const BookBig = () => {
                 <Rating value={3} />
               </div>
 
-              <p className="py-2">{book.synopsis}</p>
+              <p className="synopsis py-8">{book.synopsis}</p>
               <button className="block rounded-md w-[99px] py-2 border-solid border-2 border-[#8170F2] text-[#8170F2]">
                 Read Book
               </button>

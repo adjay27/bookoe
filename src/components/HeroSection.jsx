@@ -19,7 +19,7 @@ const HeroSection = () => {
           <div className="absolute w-[408px] h-[390px] left-[800px]">
             <div className="my-10 mx-0">
               <img
-                className="absolute rounded-2xl h-[390px] "
+                className="absolute rounded-2xl object-cover h-[390px] "
                 alt="photo"
                 src={book.image_url}
               />
@@ -45,18 +45,17 @@ const HeroSection = () => {
               ratedColor="amber"
               color="amber"
             />
-          <div className="absolute h-[25px] ">
-            <button className="absolute  top-[340px] border-solid rounded-lg px-10 w-max py-3 inline-block border-2 text-custom-white bg-[#8170F2]">
-              <span>Read Book</span>{" "}
-              <ArrowRightIcon className="h-5 float-right" />
-            </button>
+            <div className="absolute h-[25px] ">
+              <button className="absolute  top-[340px] border-solid rounded-lg px-10 w-max py-3 inline-block border-2 text-custom-white bg-[#8170F2]">
+                <span>Read Book</span>{" "}
+                <ArrowRightIcon className="h-5 float-right" />
+              </button>
 
-            <button className="absolute left-[240px] !top-[340px] border-solid rounded-lg w-max px-2 py-3 inline-block border-2 border-[#8170F2] text-[#8170F2]">
-              See All Recommendation
-            </button>
+              <button className="absolute left-[240px] !top-[340px] border-solid rounded-lg w-max px-2 py-3 inline-block border-2 border-[#8170F2] text-[#8170F2]">
+                See All Recommendation
+              </button>
+            </div>
           </div>
-          </div>
-
         </div>
       ))}
     </>
