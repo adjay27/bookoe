@@ -6,7 +6,11 @@ import { Rating } from "@material-tailwind/react";
 const HeroSection = () => {
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    heroFetch().then((data) => setBooks(data));
+    heroFetch().then((data) => {
+      setBooks(data);
+      
+    })
+    
   }, []);
 
   return (

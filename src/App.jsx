@@ -1,19 +1,20 @@
-import Check from "./Check"
-import BookBig from "./components/BookBig"
-import HeroSection from "./components/HeroSection"
+
 import Newsletter from "./components/Newsletter"
 import NavBar from "./components/NavBar"
+import { Outlet } from "react-router-dom"
 
 
 function App() {
   
   return (
     <>
+
       <NavBar />
-      <HeroSection />
-      <BookBig />
+
+      <Outlet />
       <Newsletter />
-      <Check />
+      
+      
     </>
   )
 }

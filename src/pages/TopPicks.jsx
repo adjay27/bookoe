@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import { fetchBooks } from "../fetchData.js";
 import { Rating } from "@material-tailwind/react";
 
-export const BookBig = () => {
+export const TopPicks = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetchBooks().then((data) => {
-      setBooks(data);
-      console.log(data);
-    })
+    fetchBooks().then((data) => setBooks(data));
   }, []);
 
   return (
-    <div className="backgroud-big relative top-[64px] mx-[32px] p-4 bg-[#f1f0fe] rounded-[15px] w-fit h-fit">
+    <>
+    <div className="relative bg-[#f1f0fe] h-[147px] mx-9 my-4 rounded-[15px] grid content-center">
+      <h1 className="text-4xl text-center font-bold"><strong className="text-bookoe">Top</strong> Pick Collection</h1>
+    </div>
+    <div className="relative  mx-[32px] p-4 bg-[#f1f0fe] rounded-[15px] w-fit h-fit">
       <div className="grid grid-rows-2 grid-flow-col gap-y-[92px] gap-x-[114px] justify-center">
         {books.map((book, index) => (
           <div
@@ -47,7 +48,8 @@ export const BookBig = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
-export default BookBig;
+export default TopPicks;

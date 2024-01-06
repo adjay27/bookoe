@@ -9,4 +9,3 @@ export async function heroFetch() {
       console.error('Error:', error);
     }
    }
-   

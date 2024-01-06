@@ -5,7 +5,8 @@ export default {
     extend: {
       colors: {
         "custom-white": "#EAF0EE",
-        "amber": "#FFBF00"
+        "amber": "#FFBF00",
+        "bookoe": "#8170f2"
       },
     },
   },
