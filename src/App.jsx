@@ -1,24 +1,14 @@
-
-import Newsletter from "./components/Newsletter"
-import NavBar from "./components/NavBar"
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/NavBar";
 import Footer from "./components/Footer"
-
-
-function App() {
-  
+const App = () => {
   return (
     <>
-
-      <NavBar />
-
+      <Navbar />
       <Outlet />
-      <Newsletter />
       <Footer />
-      
-      
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

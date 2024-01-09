@@ -1,12 +1,12 @@
-import TextInput from "./TextInput";
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { searchFetch } from "../searchFetch";
+import { useSearch } from "../store/search";
 
 const navigation = [
-  { name: "All", path: "all", current: false },
+  { name: "All", path: "", current: true },
   { name: "Latest", path: "latest", current: false },
   { name: "Top Pick", path: "top_picks", current: false },
 ];
@@ -16,16 +16,29 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const [warning, setWarning] = React.useState(false);
+  const setKeyword = useSearch((state) => state.setKeyword);
+
   const navigate = useNavigate();
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    try {
-      const searchResults = await searchFetch(searchQuery);
-      navigate("search-result", { state: { searchQuery } });
-    } catch (error) {
-      console.log("Error During Search: ", error);
+  React.useEffect(() => {
+    if (search.split("").length < 3 && search !== "") {
+      setWarning(true);
+    } else {
+      setWarning(false);
+    }
+  }, [search]);
+
+  const handleSearch = (e) => {
+    if (warning) {
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      setKeyword(e.target.value);
+      navigate(`books/search/${e.target.value}`);
+      setSearch('');
     }
   };
 
@@ -77,21 +90,27 @@ export default function Navbar() {
                       ))}
                     </div>
                   </div>
-                  <form className="search-box" onSubmit={handleSearch}>
-                    <TextInput
+                  <div className="search-box">
+                    <input
                       type="search"
                       className="relative m-0 block w-[250px] min-w-0 flex-auto rounded border border-solid border-neutral-600 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none motion-reduce:transition-none dark:border-neutral-500 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                       placeholder="Search by Title or Author"
                       aria-label="Search"
                       aria-describedby="button-addon2"
-                      value={searchQuery}
-                      onChange={(event) => {
-                        setSearchQuery(event.target.value);
+                      value={search}
+                      onKeyDown={handleSearch}
+                      onChange={(e) => {
+                        setSearch(e.target.value);
                       }}
                     />
+                    {warning && (
+                      <p className="absolute -bottom-8 right-6 text-red-500 text-sm">
+                        Enter 3 or more characters
+                      </p>
+                    )}
 
                     <input type="submit" hidden />
-                  </form>
+                  </div>
 
                   <div className="border-gray-500  ">
                     <button className="block rounded-md px-3 py-[0.25rem] ml-2 border-solid border border-[#8170F2]">

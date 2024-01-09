@@ -32,7 +32,7 @@ const HeroSection = () => {
             <div className="absolute top-0 left-[3px] [font-family:'Poppins-SemiBold',Helvetica] font-semibold text-[#8170f2] text-[20px] tracking-[0] leading-[normal]">
               MUST READ
             </div>
-            <div className="absolute mx-0 tracking-tight text-[48px] top-[38px] [font-family:'Poppins-SemiBold',Helvetica] font-semibold text-[#1d1d1d] leading-tight">
+            <div className="absolute mx-0 line-clamp-2 tracking-tight text-[48px] top-[38px] [font-family:'Poppins-SemiBold',Helvetica] font-semibold text-[#1d1d1d] leading-tight">
               {book.title}
             </div>
             <p className="absolute w-[446px] top-[252px] left-[3px] [font-family:'Poppins-Regular',Helvetica] font-normal text-black text-[16px] tracking-[0] leading-[normal]">

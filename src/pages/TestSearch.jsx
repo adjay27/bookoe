@@ -1,42 +1,49 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { searchFetch } from "../searchFetch";
+import { useParams } from "react-router-dom";
 import { Rating } from "@material-tailwind/react";
+import useGetData from "../useGetData";
+
+const ENDPOINT = 'https://bookapi.cm.hmw.lol/api/books';
 
 export const TestSearch = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search).get("query");
-  const [books, setBooks] = useState([]);
+  const keyword = useParams().keyword
+  const {
+    data: books,
+    error,
+  } = useGetData(`${ENDPOINT}?search=${keyword}`);
 
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      try {
-        if (query) {
-          const data = await searchFetch(query);
-          setBooks(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
-    };
+  if (error) {
+    return (
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <div className="text-3xl font-semibold">{error.message}</div>
+      </div>
+    );
+  }
 
-    fetchSearchResults();
-  }, [query, location]);
+  const searchResult = books.data
+
+  if (searchResult?.length < 1) {
+    return (
+      <div className="w-full min-h-[600px] flex justify-center items-center border border-accent rounded-lg">
+        <div className="text-5xl text-accent font-semibold">
+          Book Not Found!
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="relative bg-[#f1f0fe] h-[147px] mx-9 my-4 rounded-[15px] grid content-center ">
         <h1 className="text-4xl text-center font-bold">
-          <strong className="text-bookoe">Search For</strong>
+          <strong className="text-bookoe">Search For</strong> {keyword}
         </h1>
       </div>
       <div className="relative  mx-[32px] p-4 bg-[#f1f0fe] rounded-[15px] h-fit">
         <div className="grid gap-y-[92px] gap-x-[114px] justify-center">
-          {books.length > 0 ? (
-            books.map((book, index) => (
+          {searchResult?.map((book) => (
               <div
                 className="book-wrap grid grid-cols-2 w-[564px] h-[346px]"
-                key={index}
+                key={book.id}
               >
                 <div className="img-container  h-full w-full grid justify-center">
                   <img
@@ -62,14 +69,7 @@ export const TestSearch = () => {
                   </button>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="relative bg-[#f1f0fe] w-full mx-9 rounded-[15px] ">
-              <h1 className="text-4xl font-bold">
-                <strong className="text-bookoe">Book Not Found</strong>
-              </h1>
-            </div>
-          )}
+            ))}
         </div>
       </div>
     </>

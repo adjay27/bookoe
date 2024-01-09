@@ -1,10 +1,10 @@
 
 import HeroSection from "../components/HeroSection";
 import BookBig from "../components/BookBig";
-import BookList from "./BookList";
+import BookList from "../components/BookList";
 
 
-const AllBooks = () => {
+const Home = () => {
   return (
     <>
       <HeroSection />
@@ -14,4 +14,4 @@ const AllBooks = () => {
   );
 };
 
-export default AllBooks;
+export default Home;

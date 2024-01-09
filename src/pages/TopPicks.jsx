@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../topFetch.js";
 import { Rating } from "@material-tailwind/react";
-
+import { Link } from "react-router-dom";
 
 export const TopPicks = () => {
   const [books, setBooks] = useState([]);
@@ -46,9 +46,12 @@ export const TopPicks = () => {
                   </div>
                   <Rating value={3} />
                 </div>
+                <Link to={`/books/${book.id}`} >
+
                 <button className="block rounded-md py-2 w-full border-solid border-2 border-[#8170F2] text-[#8170F2]">
                   Read Book
                 </button>
+                </Link>
               </div>
             </div>
           ))}

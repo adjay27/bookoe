@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchBooks } from "../fetchData.js";
+import { Link } from "react-router-dom";
 import { Rating } from "@material-tailwind/react";
 
 export const BookBig = () => {
@@ -39,9 +40,11 @@ export const BookBig = () => {
 
               <p className="synopsis py-4 line-clamp-5">{book.synopsis}</p>
               <div>
+              <Link to={`/books/${book.id}`} >
                 <button className="relative top-4 rounded-md w-full py-2 border-solid border-2 border-[#8170F2] text-[#8170F2]">
                   Read Book
                 </button>
+                </Link>
               </div>
             </div>
           </div>

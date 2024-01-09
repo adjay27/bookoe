@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import AboutPage from "./pages/LatestPage";
-import AllBooks from "./pages/AllBooks";
+import Home from "./pages/Home";
 import TopPicks from "./pages/TopPicks";
 import TestSearch from "./pages/TestSearch";
 import DetailBook from "./pages/DetailBook";
@@ -10,16 +10,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
-
     children: [
       {
-        path: "all",
-        Component: AllBooks,
+        path: '',
+        Component: Home,
       },
-      { path: "books/:bookId", Component: DetailBook },
+      { path: 'books/:bookId', Component: DetailBook },
       { path: "latest", Component: AboutPage },
       { path: "top_picks", Component: TopPicks },
-      { path: "search-result", Component: TestSearch },
+      {
+        path: "books/search/:keyword",
+        Component: TestSearch,
+      },
     ],
   },
 ]);
