@@ -2,15 +2,14 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { heroFetch } from "../heroFetch.js";
 import { Rating } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [books, setBooks] = useState([]);
   useEffect(() => {
     heroFetch().then((data) => {
       setBooks(data);
-      
-    })
-    
+    });
   }, []);
 
   return (
@@ -51,8 +50,10 @@ const HeroSection = () => {
             />
             <div className="absolute h-[25px] ">
               <button className="absolute  top-[340px] border-solid rounded-lg px-10 w-max py-3 inline-block border-2 text-custom-white bg-[#8170F2]">
-                <span>Read Book</span>{" "}
-                <ArrowRightIcon className="h-5 float-right" />
+                <Link to={`/books/${books[0].id}`}>
+                  <span>Read Book</span>
+                  <ArrowRightIcon className="h-5 float-right" />
+                </Link>
               </button>
 
               <button className="absolute left-[240px] !top-[340px] border-solid rounded-lg w-max px-2 py-3 inline-block border-2 border-[#8170F2] text-[#8170F2]">

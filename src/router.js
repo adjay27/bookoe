@@ -4,6 +4,7 @@ import AboutPage from "./pages/LatestPage";
 import AllBooks from "./pages/AllBooks";
 import TopPicks from "./pages/TopPicks";
 import TestSearch from "./pages/TestSearch";
+import DetailBook from "./pages/DetailBook";
 
 const router = createBrowserRouter([
   {
@@ -11,10 +12,14 @@ const router = createBrowserRouter([
     Component: App,
 
     children: [
-      { path: "all", Component: AllBooks },
+      {
+        path: "all",
+        Component: AllBooks,
+      },
+      { path: "books/:bookId", Component: DetailBook },
       { path: "latest", Component: AboutPage },
       { path: "top_picks", Component: TopPicks },
-      { path: "/search/:query", Component: TestSearch },
+      { path: "search-result", Component: TestSearch },
     ],
   },
 ]);

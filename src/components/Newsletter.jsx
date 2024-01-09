@@ -4,7 +4,7 @@ import { EnvelopeIcon } from "@heroicons/react/24/outline";
 const Newsletter = () => {
   return (
     <>
-      <div className="bg-[#8170f2] relative top-[80px] mx-9 h-[303px] rounded-[15px] grid ">
+      <div className="bg-[#8170f2] relative top-[180px] mx-9 h-[303px] rounded-[15px] grid ">
         <div className="border-gray-500 grid grid-cols-1 content-center">
           <p className="text-custom-white text-4xl text-center font-bold ">
             Sign up for our newsletter to get our latest

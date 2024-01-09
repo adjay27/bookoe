@@ -1,6 +1,7 @@
 
 import HeroSection from "../components/HeroSection";
 import BookBig from "../components/BookBig";
+import BookList from "./BookList";
 
 
 const AllBooks = () => {
@@ -8,7 +9,7 @@ const AllBooks = () => {
     <>
       <HeroSection />
       <BookBig />
-      
+      <BookList />
     </>
   );
 };

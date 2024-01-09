@@ -1,11 +1,10 @@
-import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import SearchResult from "../pages/SearchResult";
 import TextInput from "./TextInput";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Disclosure } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { searchFetch } from "../searchFetch";
 
-const ENDPOINT = "https://bookapi.cm.hmw.lol/api/books";
 const navigation = [
   { name: "All", path: "all", current: false },
   { name: "Latest", path: "latest", current: false },
@@ -17,27 +16,16 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
-  const [status, setStatus] = React.useState();
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSearch = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await fetch(`${ENDPOINT}?search=${searchTerm}`);
-      const data = await response.json();
-
-      if (response.ok) {
-        setSearchResults(data.data);
-        setStatus("success");
-      } else {
-        setStatus("error");
-        console.error(data.message || "Error fetching search results");
-      }
+      const searchResults = await searchFetch(searchQuery);
+      navigate("search-result", { state: { searchQuery } });
     } catch (error) {
-      setStatus("error");
-      console.error("An unexpected error occurred:", error);
+      console.log("Error During Search: ", error);
     }
   };
 
@@ -96,13 +84,15 @@ export default function Navbar() {
                       placeholder="Search by Title or Author"
                       aria-label="Search"
                       aria-describedby="button-addon2"
-                      value={searchTerm}
+                      value={searchQuery}
                       onChange={(event) => {
-                        setSearchTerm(event.target.value);
+                        setSearchQuery(event.target.value);
                       }}
                     />
+
                     <input type="submit" hidden />
                   </form>
+
                   <div className="border-gray-500  ">
                     <button className="block rounded-md px-3 py-[0.25rem] ml-2 border-solid border border-[#8170F2]">
                       Edit List
@@ -135,22 +125,6 @@ export default function Navbar() {
           </>
         )}
       </Disclosure>
-
-      <main>
-        <div className="search-results">
-          {searchResults.length > 0 ? (
-            searchResults.map((result, index) => (
-              <SearchResult key={index} data={result} />
-            ))
-          ) : status === "success" ? (
-            <p>No search results found</p>
-          ) : status === "error" ? (
-            <p></p>
-          ) : (
-            <p></p>
-          )}
-        </div>
-      </main>
     </>
   );
 }

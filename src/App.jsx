@@ -2,6 +2,7 @@
 import Newsletter from "./components/Newsletter"
 import NavBar from "./components/NavBar"
 import { Outlet } from "react-router-dom"
+import Footer from "./components/Footer"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
 
       <Outlet />
       <Newsletter />
+      <Footer />
       
       
     </>
